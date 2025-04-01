@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Lista de Estudiantes</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="app" class="container d-flex justify-content-center mt-4">
+        <div class="col-md-8">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Asistencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="total-row" v-for="(data, index) in personas" :key="index" 
+                        :class="{'si': data.estado === 0, 'no': data.estado === 1, 'ex': data.estado === 2}">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ data.nombre }}</td>
+                        <td>{{ data.apellido }}</td>
+                        <td>
+                            <input type="radio" :name="'asistencia-' + index" :value="0" v-model="data.estado" @change="contador"> Sí
+                            <input type="radio" :name="'asistencia-' + index" :value="1" v-model="data.estado" @change="contador"> No
+                            <input type="radio" :name="'asistencia-' + index" :value="2" v-model="data.estado" @change="contador"> Ex
+                        </td>                    
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2">Total asistieron: {{ asistido.si }}</td>
+                        <td colspan="2">Total no asistieron: {{ asistido.no }}</td>
+                        <td colspan="2">Total con excusa: {{ asistido.ex }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <h3>Actividad diseñada por:</h3>
+        <p>Daniel Peluffo, Gabriel Cardoza, Cristian Ibañez, Carlos Hernandez, Kevin Velazquez</p>
+    </footer>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    personas: [
+                        { nombre: 'Juan', apellido: 'Pérez', estado: -1 },
+                        { nombre: 'Ana', apellido: 'Gómez', estado: -1 },
+                        { nombre: 'Carlos', apellido: 'Cantillo', estado: -1 },
+                        { nombre: 'Raul', apellido: 'Alvarez', estado: -1 },
+                        { nombre: 'Samuel', apellido: 'Duque', estado: -1 },
+                        { nombre: 'Juan', apellido: 'Garcia', estado: -1 }
+                    ],
+                    asistido: { si: 0, no: 0, ex: 0 },
+                };
+            },
+            methods: {
+                contador() {
+                    this.asistido.si = this.personas.filter(p => p.estado == 0).length;
+                    this.asistido.no = this.personas.filter(p => p.estado == 1).length;
+                    this.asistido.ex = this.personas.filter(p => p.estado == 2).length;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
