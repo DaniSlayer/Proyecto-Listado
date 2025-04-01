@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.table {
+    margin: auto; /* Centra la tabla horizontalmente */
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+/* Colores según asistencia */
+.si {
+    background-color: lightgreen !important;
+    font-weight: bold;
+}
+
+.no {
+    background-color: lightcoral !important;
+    font-weight: bold;
+}
+
+.ex {
+    background-color: aquamarine !important;
+    font-weight: bold;
+}
+
+/* Estilo para la fila de totales */
+.total-row {
+    font-weight: bold;
+    background-color: #e9ecef;
+    padding: 10px;
+    text-align: center;
+}
